@@ -17,7 +17,8 @@ spec:
     spec:
       containers:
       - name: a62
-        image: ghcr.io/im23b-schneidert/a62:latest
+        image: >-
+          image-registry.openshift-image-registry.svc:5000/zlic-tschneider1/a62:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8080

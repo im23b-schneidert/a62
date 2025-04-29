@@ -1,0 +1,41 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: a62
+  labels:
+    app: a62
+    app.kubernetes.io/part-of: a62
+spec:
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'a62:latest'
+  resources: {}
+  successfulBuildsHistory: 5
+  failedBuildsHostoryLimit: 5
+  strategy:
+    type: Source
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        namespace: openshift
+        name: 'nginx:1.20-ubi7'
+  postCommit: {}
+  source:
+    type: Git
+    git:
+      uri: 'https://github.com/im23b-schneidert/a62.git'
+    contextDir: /app
+    sourceSecret:
+      name: a62-github
+  triggers:
+    - type: Generic
+      generic:
+        secretReference:
+          name: a62-generic-webhook-secret
+    - type: ImageChange
+      imageChange: {}
+    - type: ConfigChange
+  runPolicy: Serial
+

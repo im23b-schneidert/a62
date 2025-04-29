@@ -1,0 +1,10 @@
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  name: a62
+  labels:
+    app: a62
+    app.kubernetes.io/part-of: a62
+spec:
+  lookupPolicy:
+    local: false
